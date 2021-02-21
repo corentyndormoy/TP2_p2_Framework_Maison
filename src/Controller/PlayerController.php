@@ -10,8 +10,6 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class PlayerController extends AbstractController
 {
-
-
     /**
      * Retourne la page des joueurs
      * 
@@ -49,7 +47,6 @@ class PlayerController extends AbstractController
         $player->setEmail($fakeEmail);
 
         if ($request->getMethod() == Request::METHOD_POST) {
-            $player = new Player();
             $player->setUsername($request->get("username"));
             $player->setEmail($request->get("email"));
 
@@ -73,9 +70,8 @@ class PlayerController extends AbstractController
      */
     public function show($id, EntityManagerInterface $entityManager): Response
     {
-        $player = FakeData::players(1)[0];
         $playerRepository = $entityManager->getRepository(Player::class);
-        $player = $playerRepository->findOneBy(["id" => $id]);
+        $player = $playerRepository->find($id);
 
         return $this->render("player/show", ["player" => $player, "availableGames" => FakeData::games()]);
     }
@@ -92,9 +88,8 @@ class PlayerController extends AbstractController
      */
     public function edit($id, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $player = FakeData::players(1)[0];
         $playerRepository = $entityManager->getRepository(Player::class);
-        $player = $playerRepository->findOneBy(["id" => $id]);
+        $player = $playerRepository->find($id);
 
         if ($request->getMethod() == Request::METHOD_POST) {
             $player->setUsername($request->get("username"));
@@ -107,8 +102,6 @@ class PlayerController extends AbstractController
         }
 
         return $this->render("player/form", ["player" => $player]);
-
-
     }
 
 
@@ -124,6 +117,7 @@ class PlayerController extends AbstractController
     {
         $playerRepository = $entityManager->getRepository(Player::class);
         $player = $playerRepository->find($id);
+
         $entityManager->remove($player);
         $entityManager->flush();
         
@@ -140,5 +134,4 @@ class PlayerController extends AbstractController
             return $this->redirectTo("/player");
         }
     }
-
 }

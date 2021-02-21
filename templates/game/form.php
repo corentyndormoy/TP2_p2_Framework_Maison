@@ -3,7 +3,7 @@
         <div class=" relative ">
             <input type="string"
                    class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
-                   id="name" aria-describedby="name" placeholder="Name" value="<?= $game["name"]; ?>">
+                   id="name" name="name" aria-describedby="name" placeholder="Name" value="<?= $game->getName(); ?>">
         </div>
     </div>
     <div class="flex flex-col mb-2">
@@ -11,8 +11,8 @@
             <input type="string"
                    class=" rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-purple-600 focus:border-transparent"
 
-                   id="image" aria-describedby="image" placeholder="URL"
-                   value="<?= $game["image"]; ?>">
+                   id="image" name="image" aria-describedby="image" placeholder="URL"
+                   value="<?= $game->getImage(); ?>">
         </div>
     </div>
 
