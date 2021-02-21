@@ -21,8 +21,8 @@ class GameController extends AbstractController
      */
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        $repository = $entityManager->getRepository(Game::class);
-        $games = $repository->findAll();
+        $gameRepository = $entityManager->getRepository(Game::class);
+        $games = $gameRepository->findAll();
 
         return $this->render("game/index", ["games" => $games]);
 
