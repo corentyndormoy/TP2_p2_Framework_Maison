@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\FakeData;
 use App\Entity\Game;
+use App\Entity\Score;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
@@ -72,8 +73,14 @@ class GameController extends AbstractController
     {
         $gameRepository = $entityManager->getRepository(Game::class);
         $game = $gameRepository->find($id);
+
+        $scoreRepository = $entityManager->getRepository(Score::class);
+        $scores = $scoreRepository->findBy(["game" => $game], ["score" => "DESC"]);
         
-        return $this->render("game/show", ["game" => $game]);
+        return $this->render("game/show", [
+            "game" => $game,
+            "scores" => $scores
+            ]);
     }
 
 

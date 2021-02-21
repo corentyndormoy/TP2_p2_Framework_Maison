@@ -7,6 +7,33 @@
             <h1 class="flex-auto text-xl font-semibold dark:text-gray-50">
                 <?= $game->getName(); ?>
             </h1>
+
+            <table class="col-span-2 table p-4 bg-white shadow rounded-lg w-full ">
+                <thead>
+                <tr class="text-left">
+                    <th class="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                        User
+                    </th>
+                    <th class="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                        Score
+                    </th>
+                    <th class="border-b-2 p-4 dark:border-dark-5 whitespace-nowrap font-normal text-gray-900">
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    <?php foreach ($scores as $score): ?>
+                    <tr class="text-gray-700">
+                        <td class="border-b-2 p-4 dark:border-dark-5">
+                            <?= $score->getPlayer()->getUsername(); ?>
+                        </td>
+                        <td class="border-b-2 p-4 dark:border-dark-5">
+                            <?= $score->getScore(); ?>                    
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
