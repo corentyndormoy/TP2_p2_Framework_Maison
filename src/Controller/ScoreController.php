@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 
-use App\FakeData;
 use App\Entity\Player;
 use App\Entity\Game;
 use App\Entity\Score;

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\FakeData;
 use App\Entity\Player;
+use App\Entity\Game;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
@@ -125,12 +126,30 @@ class PlayerController extends AbstractController
 
     }
 
-    public function addgame($id, Request $request): Response
+    /**
+     * Ajoute un jeu
+     * 
+     * @param                           $userId
+     * @param                           $gameId
+     * @param Request                   $request
+     * @param EntityManagerInterface    $entityManager
+     * 
+     * @return Response
+     */
+    public function addgame($userId, $gameId, Request $request, EntityManagerInterface $entityManager): Response
     {
         if ($request->getMethod() == Request::METHOD_POST) {
-            /**
-             * @todo enregistrer l'objet
-             */
+            $playerRepository = $entityManager->getRepository(Player::class);
+            $player = $playerRepository->find($userId);
+
+            $gameRepository = $entityManager->getRepository(Game::class);
+            $game = $gameRepository->find($gameId);
+
+            $player->addGame($game);
+
+            $entityManager->persist($player);
+            $entityManager->flush();
+
             return $this->redirectTo("/player");
         }
     }
