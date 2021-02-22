@@ -25,7 +25,7 @@ class GameController extends AbstractController
         $gameRepository = $entityManager->getRepository(Game::class);
         $games = $gameRepository->findAll();
 
-        return $this->render("game/index", ["games" => $games]);
+        return $this->render("game/index.html.twig", ["games" => $games]);
 
     }
 
@@ -57,7 +57,7 @@ class GameController extends AbstractController
             return $this->redirectTo("/game");
         }
 
-        return $this->render("game/form", ["game" => $game]);
+        return $this->render("game/form.html.twig", ["game" => $game]);
     }
 
 
@@ -77,7 +77,7 @@ class GameController extends AbstractController
         $scoreRepository = $entityManager->getRepository(Score::class);
         $scores = $scoreRepository->findBy(["game" => $game], ["score" => "DESC"]);
         
-        return $this->render("game/show", [
+        return $this->render("game/show.html.twig", [
             "game" => $game,
             "scores" => $scores
             ]);
@@ -108,7 +108,7 @@ class GameController extends AbstractController
             return $this->redirectTo("/game");
         }
         
-        return $this->render("game/form", ["game" => $game]);
+        return $this->render("game/form.html.twig", ["game" => $game]);
     }
 
     /**

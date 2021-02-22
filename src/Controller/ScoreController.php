@@ -32,7 +32,7 @@ class ScoreController extends AbstractController
         $gameRepository = $entityManager->getRepository(Game::class);
         $games = $gameRepository->findAll();
 
-        return $this->render("score/index", ["scores" => $scores,
+        return $this->render("score/index.html.twig", ["scores" => $scores,
             "games" => $games, "players" => $players]);
     }
 
