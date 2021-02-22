@@ -8,11 +8,14 @@ use App\Entity\Game;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 class PlayerController extends AbstractController
 {
     /**
      * Retourne la page des joueurs
+     * 
+     * @Route("/player", name="player")
      * 
      * @param Request                   $request
      * @param EntityManagerInterface    $entityManager
@@ -31,6 +34,8 @@ class PlayerController extends AbstractController
 
     /**
      * Ajoute un nouveau joueur
+     * 
+     * @Route("/player/add", name="player_add")
      * 
      * @param Request                   $request
      * @param EntityManagerInterface    $entityManager
@@ -64,6 +69,8 @@ class PlayerController extends AbstractController
     /**
      * Affiche les détails d'un joueur
      * 
+     * @Route("/player/show/{id}", name="player_show")
+     * 
      * @param                           $id
      * @param EntityManagerInterface    $entityManager
      * 
@@ -80,6 +87,8 @@ class PlayerController extends AbstractController
 
     /**
      * Modifie un joueur
+     * 
+     * @Route("/player/edit/{id}", name="player_edit")
      * 
      * @param                           $id
      * @param Request                   $request
@@ -109,6 +118,8 @@ class PlayerController extends AbstractController
     /**
      * Supprime un joueur
      * 
+     * @Route("/player/delete/{id}", name="player_delete")
+     * 
      * @param                           $id
      * @param EntityManagerInterface    $entityManager
      * 
@@ -128,6 +139,8 @@ class PlayerController extends AbstractController
 
     /**
      * Ajoute un jeu
+     * 
+     * @Route("/player/add-game/{userId}/{gameId}", name="player_add_game")
      * 
      * @param                           $userId
      * @param                           $gameId

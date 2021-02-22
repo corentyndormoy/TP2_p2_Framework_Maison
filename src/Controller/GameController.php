@@ -9,11 +9,14 @@ use App\Entity\Score;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 class GameController extends AbstractController
 {
     /**
      * Affiche la page des jeux
+     * 
+     * @Route("/game", name="game")
      * 
      * @param Request                   $request
      * @param EntityManagerInterface    $entityManager
@@ -31,6 +34,8 @@ class GameController extends AbstractController
 
     /**
      * Ajoute un jeu
+     * 
+     * @Route("/game/add", name="game_add")
      * 
      * @param Request                   $request
      * @param EntityManagerInterface    $entityManager
@@ -64,6 +69,8 @@ class GameController extends AbstractController
     /**
      * Affiche les détails d'un jeu
      * 
+     * @Route("/game/show/{id}", name="game_show")
+     * 
      * @param                           $id
      * @param EntityManagerInterface    $entityManager
      * 
@@ -86,6 +93,8 @@ class GameController extends AbstractController
 
     /**
      * Modifie un jeu
+     * 
+     * @Route("/game/edit/{id}", name="game_edit")
      * 
      * @param                           $id
      * @param Request                   $request
@@ -113,6 +122,8 @@ class GameController extends AbstractController
 
     /**
      * Supprime un jeu
+     * 
+     * @Route("/game/delete/{id}", name="game_delete")
      * 
      * @param $id
      * @param EntityManagerInterface $entityManager

@@ -10,11 +10,14 @@ use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ScoreController extends AbstractController
 {
     /**
      * Affiche la page des scores
+     * 
+     * @Route("/score", name="score")
      * 
      * @param Request                   $request
      * @param EntityManagerInterface    $entityManager
@@ -38,6 +41,8 @@ class ScoreController extends AbstractController
 
     /**
      * Ajoute un score
+     * 
+     * @Route("/score/add", name="score_add")
      * 
      * @param Request                   $request
      * @param EntityManagerInterface    $entityManager
@@ -65,5 +70,27 @@ class ScoreController extends AbstractController
 
             return $this->redirectTo("/score");
         }
+    }
+
+    /**
+     * Supprime un score
+     * 
+     * @Route("/score/delete/{id}", name="score_delete")
+     * 
+     * @param                           $id
+     * @param EntityManagerInterface    $entityManager
+     * 
+     * @return Response
+     */
+    public function delete($id, EntityManagerInterface $entityManager): Response
+    {
+        $scoreRepository = $entityManager->getRepository(Score::class);
+        $score = $scoreRepository->find($id);
+
+        $entityManager->remove($score);
+        $entityManager->flush();
+        
+        return $this->redirectTo("/score");
+
     }
 }
